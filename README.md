@@ -232,9 +232,39 @@ vendor/bin/codecept run functional,unit --coverage --coverage-html --coverage-xm
 
 You can see code coverage output under the `tests/_output` directory.
 
-# 2.5 Working with Forms
+Start local web server:
 
     php yii serve
+
+# 2.4 Saying Hello
+
+http://localhost:8080/index.php?r=site%2Fentry
+
+```php
+/* controllers/SiteController.php */
+
+class SiteController extends Controller
+{
+    // ...existing code...
+    public function actionSay($message = 'Hello')
+    {
+        return $this->render('say', ['message' => $message]);
+    }
+}
+```
+
+```php
+/* views/site/say.php */
+<?php
+
+use yii\helpers\Html;
+
+?>
+
+<?= Html::encode($message) ?>
+```
+
+# 2.5 Working with Forms
 
 http://localhost:8080/index.php?r=site%2Fentry
 
