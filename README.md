@@ -326,3 +326,24 @@ public function actionEntry()
 
 <?php ActiveForm::end(); ?>
 ```
+
+# 2.6 Working with Databases
+
+Set up database in files: `config/db.php` or `config/web.php`
+
+```php
+'components' => [
+    'db' => [
+        'class' => 'yii\db\Connection',
+        'dsn' => 'mysql:host=localhost;dbname=yii2bs3',
+        'username' => 'root',
+        'password' => 'root',
+        'charset' => 'utf8',
+    ],
+],
+```
+http://localhost:8080/index.php?r=country%2Findex
+
+```php
+$countries = Country::find()->orderBy('name')->all();
+```
