@@ -3,12 +3,13 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
+use app\models\EntryForm;
 use app\models\ContactForm;
+use app\models\LoginForm;
 
 class SiteController extends Controller
 {
@@ -129,5 +130,22 @@ class SiteController extends Controller
     public function actionSay($message = 'Hello')
     {
         return $this->render('say', ['message' => $message]);
+    }
+
+    public function actionEntry()
+    {
+        $model = new EntryForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        {
+            // valid data received in $model
+            // do something meaningful here about $model ...
+            return $this->render('entry-confirm', ['model' => $model]);
+
+        } else {
+
+            // either the page is initially displayed or there is some validation error
+            return $this->render('entry', ['model' => $model]);
+        }
     }
 }
