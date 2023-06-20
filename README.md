@@ -1,3 +1,6 @@
+    Yii2 ver. 2.0.42
+    PHP <= 8.0
+
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
@@ -347,3 +350,9 @@ http://localhost:8080/index.php?r=country%2Findex
 ```php
 $countries = Country::find()->orderBy('name')->all();
 ```
+
+# 2.7 Generating Code with Gii
+
+Gii generator you can find: http://localhost:8080/index.php?r=gii
+
+Show CRUD Countries: http://localhost:8080/index.php?r=country%2Findex
