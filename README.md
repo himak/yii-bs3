@@ -231,3 +231,68 @@ vendor/bin/codecept run functional,unit --coverage --coverage-html --coverage-xm
 ```
 
 You can see code coverage output under the `tests/_output` directory.
+
+# 2.5 Working with Forms
+
+    php yii serve
+
+http://localhost:8080/index.php?r=site%2Fentry
+
+```php
+/* models/EntryForm.php */
+
+class EntryForm extends Model
+{
+    public $name;
+    public $email;
+    
+    public function rules()
+    {
+        return [
+            [['name', 'email'], 'required'],
+            ['email', 'email'],
+        ]; 
+    }
+}
+```
+
+```php
+/* controllers/SiteController.php */
+
+public function actionEntry()
+{
+    $model = new EntryForm();
+
+    if ($model->load(Yii::$app->request->post()) && $model->validate())
+    {
+        // valid data received in $model
+        // do something meaningful here about $model ...
+        return $this->render('entry-confirm', ['model' => $model]);
+
+    } else {
+
+        // either the page is initially displayed or there is some validation error
+        return $this->render('entry', ['model' => $model]);
+    }
+}
+```
+
+```php
+/* views/site/entry.php */
+
+<?php
+    use yii\helpers\Html;
+    use yii\widgets\ActiveForm;
+?>
+
+<?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'email') ?>
+    
+    <div class="form-group">
+        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+    </div>
+
+<?php ActiveForm::end(); ?>
+```
